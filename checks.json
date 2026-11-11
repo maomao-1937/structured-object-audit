@@ -1,0 +1,26 @@
+[
+  {
+    "args": ["structured_object_audit.py", "examples/route.json"],
+    "exit": 0,
+    "report": {"status": "pass", "findings": []}
+  },
+  {
+    "args": ["structured_object_audit.py", "examples/sensor-findings.json"],
+    "exit": 1,
+    "report": {"status": "findings", "findings": [
+      {"code": "additional_properties", "pointer": "/$defs/sensor~1reading~0/additionalProperties"},
+      {"code": "required_missing", "pointer": "/$defs/sensor~1reading~0/properties/value"},
+      {"code": "required_undeclared", "pointer": "/$defs/sensor~1reading~0/required/1"}
+    ]}
+  },
+  {
+    "args": ["structured_object_audit.py", "examples/root-union.json"],
+    "exit": 1,
+    "report": {"status": "findings", "findings": [{"code": "root_any_of", "pointer": "/anyOf"}]}
+  },
+  {
+    "args": ["structured_object_audit.py", "examples/duplicate-member.json"],
+    "exit": 2,
+    "report": {"status": "error", "error": {"code": "duplicate_key"}}
+  }
+]

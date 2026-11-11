@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {"latest": {"$ref": "#/$defs/sensor~1reading~0"}},
+  "required": ["latest"],
+  "additionalProperties": false,
+  "$defs": {
+    "sensor/reading~": {
+      "type": "object",
+      "properties": {"station": {"type": "string"}, "value": {"type": "number"}},
+      "required": ["station", "typo"]
+    }
+  }
+}

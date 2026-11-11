@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "anyOf": [{"type": "object", "required": [], "additionalProperties": false}]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "legs": {"type": "array", "items": {"$ref": "#/$defs/leg"}},
+    "backup": {"anyOf": [{"$ref": "#/$defs/leg"}, {"type": "null"}]}
+  },
+  "required": ["legs", "backup"],
+  "additionalProperties": false,
+  "$defs": {
+    "leg": {
+      "type": "object",
+      "properties": {
+        "station": {"type": "string"},
+        "platform": {"type": ["integer", "null"]}
+      },
+      "required": ["station", "platform"],
+      "additionalProperties": false
+    }
+  }
+}

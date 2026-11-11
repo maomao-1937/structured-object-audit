@@ -1,0 +1,9 @@
+# Research
+
+- The OpenAI guide requires an object at the root without `anyOf`, all fields in `required`, and `additionalProperties` set to `false` on object schemas. Its examples also show nullable fields and object definitions. [OpenAI Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs)
+- In January 2025, an SDK user reported an API rejection when adding metadata to a nested Pydantic model. The reported transformation dropped `additionalProperties: false` after inlining a reference. The issue is closed and links to the corresponding SDK patch. [openai-python issue #2024](https://github.com/openai/openai-python/issues/2024) · [SDK patch #2025](https://github.com/openai/openai-python/pull/2025)
+- In June 2026, a LangChain user reported that the streaming Responses API path emitted a strict payload whose nested `$defs` entries lacked object closure and complete `required` fields. The report includes an offline inspection of the generated payload and an observed API error. [langchain issue #38223](https://github.com/langchain-ai/langchain/issues/38223)
+
+Together the reports suggest auditing the final schema artifact produced by an integration. The SDK's conversion accepts Pydantic input and transforms the generated schema. This CLI reads a raw schema artifact from any generator and emits actionable locations for three object rules. JSON Schema validators can assess broader schema and instance validity. The CLI targets the OpenAI object restrictions cited above. [OpenAI Python SDK converter](https://github.com/openai/openai-python/blob/main/src/openai/lib/_pydantic.py)
+
+The synthetic route and sensor fixtures exercise the same classes of nested structure without importing examples from the issue reports. Reproduction is local and covers the documented CLI results. No live provider response is needed to run the fixture checks.
